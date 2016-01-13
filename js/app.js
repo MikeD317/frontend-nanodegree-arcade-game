@@ -57,7 +57,8 @@ var Player = function(x,y) {
 Player.prototype.update = function(dt) {
     
     if (this.y < -50) {
-        this.returnToStart();
+        var myVar = setTimeout(this.returnToStart(),5000);
+        
     }
 };
 
@@ -67,18 +68,18 @@ Player.prototype.render = function() {
 
 Player.prototype.returnToStart = function() {
     this.x = 200;
-    this.y = 400;
+    this.y = 450;
 };
 
 // a handleInput() method.
 Player.prototype.handleInput = function(keyCode) {
-    if(keyCode === 'left')
+    if(keyCode === 'left' && this.x >= 50)
         { this.x -= 100}
-    if(keyCode === 'right')
+    if(keyCode === 'right' && this.x <= 350)
         {this.x += 100}
-    if (keyCode === 'down')
+    if (keyCode === 'down' && this.y < 420)
         {this.y += 100}
-    if (keyCode === 'up') {
+    if (keyCode === 'up' && this.y > 0) {
         this.y -= 100}
 };
 
@@ -92,7 +93,7 @@ var enemy3 = new Enemy(makeRandomY(), makeRandomSpeed());
 allEnemies = [enemy1, enemy2, enemy3];
 
 // Place the player object in a variable called player
-var player = new Player(200, 420);
+var player = new Player(200, 450);
 
 
 // This listens for key presses and sends the keys to your
