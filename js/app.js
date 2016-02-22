@@ -6,7 +6,7 @@ function makeRandomY() {
 }
 
 function makeRandomSpeed() {
-    var speedArray = [100, 200, 300, 400, 500, 600];
+    var speedArray = [100, 200, 300, 400];
     return speedArray[Math.floor(Math.random() * speedArray.length)];
 }
 
@@ -53,22 +53,29 @@ var Player = function(x,y) {
     this.y = y;
 };
 
-// This class requires an update(), render() and
+// This is the Player's update function
 Player.prototype.update = function(dt) {
     
-    if (this.y < -50) {
-        var myVar = setTimeout(this.returnToStart(),5000);
+    if (this.y == -75) {
+        var myVar = setTimeout(this.returnToStart(),10000);
+        alert("You WON!");
         
     }
 };
 
+//This is the Player's render function
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+//This function returns the player to the Start
 Player.prototype.returnToStart = function() {
     this.x = 200;
-    this.y = 450;
+    this.y = 425;
+    var enemy1 = new Enemy(makeRandomY(), makeRandomSpeed());
+    var enemy2 = new Enemy(makeRandomY(), makeRandomSpeed());
+    var enemy3 = new Enemy(makeRandomY(), makeRandomSpeed());
+    allEnemies = [enemy1, enemy2, enemy3];
 };
 
 // a handleInput() method.
@@ -79,11 +86,22 @@ Player.prototype.handleInput = function(keyCode) {
         {this.x += 100}
     if (keyCode === 'down' && this.y < 420)
         {this.y += 100}
-    if (keyCode === 'up' && this.y > 0) {
+    if (keyCode === 'up' && this.y >= 0) {
         this.y -= 100}
 };
 
-
+//This function checks for collisions
+var checkCollisions = function(allEnemies, player) {
+    for (var i = 0; i < allEnemies.length; i++) {
+        if (((allEnemies[i].x - player.x) < 60) &&
+            ((player.x - allEnemies[i].x) < 60)&&
+            ((player.y - allEnemies[i].y) < 60)&& 
+            ((allEnemies[i].y - player.y) < 60)) {
+                alert("You LOST!  Please try again.");
+                player.returnToStart();
+            }
+        }
+};
 // Now instantiate your objects.
 var enemy1 = new Enemy(makeRandomY(), makeRandomSpeed());
 var enemy2 = new Enemy(makeRandomY(), makeRandomSpeed());
@@ -93,7 +111,7 @@ var enemy3 = new Enemy(makeRandomY(), makeRandomSpeed());
 allEnemies = [enemy1, enemy2, enemy3];
 
 // Place the player object in a variable called player
-var player = new Player(200, 450);
+var player = new Player(200, 425);
 
 
 // This listens for key presses and sends the keys to your
