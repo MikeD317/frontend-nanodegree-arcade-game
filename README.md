@@ -1,6 +1,11 @@
-frontend-nanodegree-arcade-game
-===============================
+#This is a clone of the classic arcade game **Frogger**
 
-Students should use this [rubric](https://www.udacity.com/course/viewer/#!/c-nd001/l-2696458597/m-2687128535) for self-checking their submission.
+##Installation
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+Open the index.html file with your web browser.
+
+##How to Play
+
+_Goal_: To reach the water with colliding with any of the bugs.
+
+_How to Move the Frog_: Use the up, down, left, and right arrows to move the frog across the screen.
